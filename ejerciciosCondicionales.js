@@ -278,24 +278,36 @@ switch (operacion) {
             console.log("Ingrese una opcion valida de operador, entre 1 y 4");
         break;
     }
-
-    console.log("***PUNTO 13***");
-    let id = parseInt(prompt("Ingresa el numero de tu cedula").trim());
-    apellidos = prompt("Escribe solo tus apellidos");
-nombres = prompt("Escribe solo tus nombres");
+    
+*/
+console.log("***PUNTO 13***");
+    
+let id = parseInt(prompt("Ingresa el numero de tu cedula").trim());
+let apellidos = prompt("Escribe solo tus apellidos").trim().toLowerCase().split(" ");
+let nombres = prompt("Escribe solo tus nombres").trim().toLowerCase().split(" ");
 let nacimiento = prompt("Ingresa tu fecha de nacimiento en este formato DD/MM/AAAA").trim();
-municipioNacimiento = prompt("Ingresa el municipio de nacimiento");
-departamentoNacimiento = prompt("Ingresa el departamento de nacimiento");
+let municipioNacimiento = prompt("Ingresa el municipio de nacimiento").trim().toLowerCase().split(" ");
+let departamentoNacimiento = prompt("Ingresa el departamento de nacimiento").trim().toLowerCase().split(" ");
 let estatura = parseInt(prompt("Ingresa tu estura en centimetros").trim());
-sangre = prompt("Ingresa tu tipo de sangre, ejemplo O+ AB");
-genero = prompt("Ingresa tu genero, hombre o mujer");
+let sangre = prompt("Ingresa tu tipo de sangre, ejemplo O+, AB").trim().toUpperCase();
+let genero = prompt("Ingresa tu genero, Hombre o Mujer").trim().toLowerCase().split(" ");
 let fechaExpedicion = prompt("Ingresa la fecha de expedicion del documento en formato DD/MM/AAAA").trim();
-lugarExpedicion = prompt("Ingresa el lugar de expedicion del documento");
+let lugarExpedicion = prompt("Ingresa el lugar de expedicion del documento").trim().toLowerCase().split(" ");
 
-function ordenar (texto){
-    let sinEspacios = texto.trim().toLowerCase().slice(1);
-    let primera = texto.trim()[0].toUpperCase();
-    return primera+sinEspacios;
+function ordenar(texto) {
+    if (texto.length == 2) {
+        let nombre1 = texto[0].slice(1)
+        let nombre2 = texto[1].slice(1)
+        let primeraNombre1 = texto[0].charAt(0).toUpperCase();
+        let primeraNombre2 = texto[1].charAt(0).toUpperCase();
+        return primeraNombre1+nombre1+" "+primeraNombre2+nombre2;
+
+    }else{
+        let restante= texto[0].slice(1);
+        let primeraLetra = texto[0].charAt(0).toUpperCase();
+        texto[0] = primeraLetra + restante+" ";
+        return texto.join(" ")
+    }
 }
 
 
@@ -305,9 +317,9 @@ municipioNacimiento = ordenar(municipioNacimiento);
 departamentoNacimiento = ordenar(departamentoNacimiento);
 genero = ordenar(genero);
 lugarExpedicion = ordenar(lugarExpedicion);
-sangre = sangre.trim().toUpperCase();
 
 respuesta = confirm(`Tu numero de cedula es: ${id}, tu(s) apellidos son : ${apellidos}, tu(s) nombres son: ${nombres}, naciste el ${nacimiento} en ${municipioNacimiento} en el departamento ${departamentoNacimiento}, tu altura es: ${estatura} cms, tipo de sangre: ${sangre}, tu genero es: ${genero}, la fecha de expedicion de tu documento es ${fechaExpedicion} en el municipio ${lugarExpedicion}, ESTAN CORRECTO LOS DATOS?`);
+
 if(respuesta){
     let dni = {
         numero: id,
@@ -327,4 +339,3 @@ if(respuesta){
 }else{
     console.log("Vuelva a intentarlo en 1 mes");
 }
-    */
