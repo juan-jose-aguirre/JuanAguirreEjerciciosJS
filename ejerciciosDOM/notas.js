@@ -23,7 +23,7 @@ let listaNotas = [
     titulo: "nota4",
     texto: "prueba4",
     realizada: false,
-  },
+  }
 ];
 //Creamos un id global para llevar la cuenta de los elementos en el arreglo de listaNotas
 let idGlobal = 4;
@@ -203,13 +203,13 @@ function mostrarNotas(arreglo) {
   } else {
     let lugar = document.getElementById("verNotas");
     lugar.className =
-      "d-flex flex-wrap justify-content-center align-items-center m-auto bg-danger";
+      "d-flex flex-wrap justify-content-center align-items-center m-auto";
     let i = 0;
     for (let nota of arreglo) {
       let tarjeta = document.createElement("div");
       tarjeta.innerHTML = `<div class="card m-1" style="width: 13rem;">
       <div class="card-body">
-        <h5 class="card-title border-bottom"><input class="me-3" onClick="marcarRealizada(${i},listaNotas)" type="checkbox" ${
+        <h5 class="card-title border-bottom"><input class="me-3" onClick="marcarRealizada(${nota.id},listaNotas)" type="checkbox" ${
         nota.realizada ? "checked" : ""
       } type="checkbox" name="realizada" id="realizada${nota.id}">${
         nota.titulo
@@ -233,17 +233,30 @@ function borrarNota(index, arreglo) {
   limpiarCampos();
   mostrarNotas(arreglo);
 }
-function marcarRealizada(index, arreglo) {
-  limpiarNotas();
+function marcarRealizada(identificador, arreglo) {
+  let index;
+  for( let nota of arreglo){
+    if(nota.id == identificador){
+      index = arreglo.indexOf(nota);
+    }
+  }
+  console.log(index);
   let nota = arreglo[index];
   nota.realizada = !nota.realizada;
-  mostrarNotas(arreglo);
+  if(buscar.value == ""){
+    limpiarNotas();
+    mostrarNotas(arreglo);
+  }
+  if(filtroRealizada.checked){
+    limpiarNotas();
+    filtraRealizadas(arreglo,{target:{checked:true}},buscar.value)
+  }
+  
 }
 
 function limpiarCampos() {
   let txtTitulo = document.getElementById("titulo");
   let txtTexto = document.getElementById("descripcion");
-  buscar.value = "";
   filtroRealizada.checked = false;
   txtTitulo.value = "";
   txtTexto.value = "";

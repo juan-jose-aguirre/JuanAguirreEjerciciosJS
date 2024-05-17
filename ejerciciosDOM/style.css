@@ -1,0 +1,23 @@
+body {
+  height: 100vh;
+  background-color: #00918a;
+
+  header {
+    height: 10%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    a {
+      background-color: red;
+    }
+  }
+  main {
+    padding-top: 10vh;
+  }
+  footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 10%;
+  }
+}
