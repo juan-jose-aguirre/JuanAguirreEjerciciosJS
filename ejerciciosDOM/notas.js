@@ -31,6 +31,7 @@ let idGlobal = 4;
 mostrarNotas(listaNotas);
 
 //a continuacion,obtenemos los elementos que necestitamos desde el html
+
 //botones
 let btnGuardar = document.getElementById("btnGuardarNota");
 let btnLimpiar = document.getElementById("btnLimpiar");
@@ -40,7 +41,9 @@ let descripcion = document.getElementById("descripcion");
 //inputs filtros de busqueda
 let filtroRealizada = document.getElementById("realizadas");
 let buscar = document.getElementById("buscar");
+
 //Creacion de los eventos que se activarán con cada uno de los elementos de html
+
 //cuando le den al boton guardar activa la funcion agregarNota, que nos permite guardar en el arreglo la nueva nota, le enviamos como parametros el titulo, la descripcion y el arreglo de listaNotas
 btnGuardar.addEventListener("click", function () {
   agregarNota(titulo, descripcion, listaNotas);
@@ -60,11 +63,9 @@ buscar.addEventListener("input", function (e) {
 
 //funcion para filtrar por texto ingresado, recibe el arreglo original, texto que ingreso el usuario y el valor del input checkbox, si es true o false
 function filtraTexto(arreglo,texto,realizadas) {
-  //iniciamos un arreglo de ayuda
   let arregloFiltrado = [];
   //Validamos que el texto no este vacio y que ademas el checkbox este apagado o en false
   if (texto != "" && realizadas == false) {
-    //limpiamos el div donde van las notas
     limpiarNotas();
     //vamos a filtrar el arreglo original para obtener lo que en titulo o texto contengan el texto que dio el usuario y lo guardamos en el arreglo de ayuda
     arregloFiltrado = arreglo.filter(
@@ -72,7 +73,6 @@ function filtraTexto(arreglo,texto,realizadas) {
         nota.titulo.toLowerCase().includes(texto) ||
         nota.texto.toLowerCase().includes(texto)
     );
-    //mostramos el arreglo de ayuda
     mostrarNotas(arregloFiltrado);
     //validamos si el texto no esta vacio y si el checkbox esta activado o en true
   }else if(texto != "" && realizadas == true){
@@ -88,11 +88,9 @@ function filtraTexto(arreglo,texto,realizadas) {
     for (let i = 0; i < arregloFiltrado.length; i++) {
       //validamos las notas de arreglo de ayuda 1 que tengan lo propiedad realizada = true
       if (arregloFiltrado[i].realizada) {
-        //guardamos en el arreglo de ayuda 2
         arregloMejorado.push(arregloFiltrado[i]);
       }
     }
-    //limpiamos el div donde van las notas
     limpiarNotas();
     //mostramos las notas del arreglo de ayuda 2, donde ya sabemos que solo hay notas que incluyen el texto del usuario y tienen la propiedad realizadas = true
     mostrarNotas(arregloMejorado);
@@ -102,17 +100,14 @@ function filtraTexto(arreglo,texto,realizadas) {
     for (let i = 0; i < arreglo.length; i++) {
       //validamos si cada nota tiene la propiedad realizada en true
       if (arreglo[i].realizada) {
-        //guardamos en el arreglo de ayuda las que cumplan la condicion
         arregloFiltrado.push(arreglo[i]);
       }
     }
-    //limpiamos el div donde van las notas
     limpiarNotas();
     //pintamos las notas que tengan la propiedad realizada en true
     mostrarNotas(arregloFiltrado);
     
   } else {
-    //limpiamos el div donde van las notas
     limpiarNotas();
     //pintamos las notas que tengan texto = vacio y realizadas en false
     mostrarNotas(arreglo);
@@ -120,18 +115,15 @@ function filtraTexto(arreglo,texto,realizadas) {
 }
 //funcion donde se le pasa el arreglo original, el evento, y el texto que existe en el input de busqueda
 function filtraRealizadas(arreglo, e,texto) {
-  //se crea el arreglo de ayuda 1
   let arregloFiltrado = [];
   //validamos si el evento.target.checked es true y si el texto esta vacio
   if (e.target.checked == true && texto == "") {
-    //recorremos el arreglo
     for (let i = 0; i < arreglo.length; i++) {
       //los elementos del arreglo que tengan la propiedad realizada en true los guardamos en el arreglo de ayuda 1
       if (arreglo[i].realizada) {
         arregloFiltrado.push(arreglo[i]);
       }
     }
-    //limpiamos el div donde van las notas
     limpiarNotas();
     //validamos si el arreglo de ayuda 1 esta vacio
     if (arregloFiltrado == 0) {
@@ -143,7 +135,6 @@ function filtraRealizadas(arreglo, e,texto) {
       aviso.innerHTML = `<div class="alert alert-info" role="alert">
         No hay notas finalizadas!
       </div>`;
-      //agrgegamos al div donde van las notas la alerta de boostrap
       lugar.appendChild(aviso);
     } else {
       //mostramos el arreglo filtrado si no esta vacio
@@ -151,7 +142,6 @@ function filtraRealizadas(arreglo, e,texto) {
     }
     //validamos si el checkbox esta encendido o en true y el texto no esta vacio
   }else if(e.target.checked == true && texto != ""){
-    //*************************************************************************************************************vamos aqui */
     limpiarNotas();
     arregloFiltrado = arreglo.filter(nota => nota.titulo.includes(texto) || nota.texto.includes(texto));
     let arregloMejorado = [];
@@ -203,32 +193,39 @@ function mostrarNotas(arreglo) {
   } else {
     let lugar = document.getElementById("verNotas");
     lugar.className =
-      "d-flex flex-wrap justify-content-center align-items-center m-auto";
+      "d-flex flex-wrap justify-content-center align-items-center";
     let i = 0;
     for (let nota of arreglo) {
       let tarjeta = document.createElement("div");
-      tarjeta.innerHTML = `<div class="card m-1" style="width: 13rem;">
-      <div class="card-body">
-        <h5 class="card-title border-bottom"><input class="me-3" onClick="marcarRealizada(${nota.id},listaNotas)" type="checkbox" ${
-        nota.realizada ? "checked" : ""
-      } type="checkbox" name="realizada" id="realizada${nota.id}">${
-        nota.titulo
-      }</h5>
-            <p class="card-text ${
-              nota.realizada ? "text-decoration-line-through" : ""
-            }">${nota.texto}</p>
-            <button onClick="borrarNota(${i},listaNotas)" class="btn btn-primary">Borrar Nota</button>
-            </div>
-            </div>`;
+      tarjeta.innerHTML = `
+      <div class="card m-1 tarjeta" style="width: 13rem;">
+        <div class="card-body text-center">
+          <h5 class="card-title d-flex justify-content-between bg-secondary-subtle p-1 rounded">
+            <input class="me-3" onClick="marcarRealizada(${nota.id},listaNotas)" ${nota.realizada ? "checked" : ""} type="checkbox" name="realizada" id="realizada${nota.id}">
+            ${nota.titulo}
+          </h5>
+          <p class="card-text text-start ${nota.realizada ? "text-decoration-line-through" : ""}">${nota.texto}</p>
+          <button onClick="borrarNota(${nota.id},listaNotas)" class="btn btn-danger">Borrar Nota</button>
+        </div>
+      </div>`;
       lugar.appendChild(tarjeta);
       i++;
     }
   }
 }
 
-function borrarNota(index, arreglo) {
+function borrarNota(identificador, arreglo) {
   idGlobal--;
-  arreglo.splice(index, 1);
+  console.log(identificador)
+  console.log(arreglo)
+  for (let i = 0; i < arreglo.length; i++) {
+    if (arreglo[i].id == identificador) {
+      let indice = arreglo.indexOf(arreglo[i])
+      console.log(indice);
+      arreglo.splice(indice, 1);
+    }
+  }
+  buscar.value = ""
   limpiarNotas();
   limpiarCampos();
   mostrarNotas(arreglo);
@@ -240,16 +237,20 @@ function marcarRealizada(identificador, arreglo) {
       index = arreglo.indexOf(nota);
     }
   }
-  console.log(index);
   let nota = arreglo[index];
   nota.realizada = !nota.realizada;
-  if(buscar.value == ""){
+  if(buscar.value != "" && filtroRealizada.checked){
+    limpiarNotas();
+    filtraTexto(arreglo,buscar.value,true)
+  }else if(buscar.value != "" && filtroRealizada.checked == false){
+    limpiarNotas();
+    filtraTexto(arreglo,buscar.value,false)
+  }else if (buscar.value == "" && filtroRealizada.checked == true) {
+    limpiarNotas();
+    filtraRealizadas(arreglo,{target:{checked:true}},"")
+  }else{
     limpiarNotas();
     mostrarNotas(arreglo);
-  }
-  if(filtroRealizada.checked){
-    limpiarNotas();
-    filtraRealizadas(arreglo,{target:{checked:true}},buscar.value)
   }
   
 }

@@ -41,13 +41,13 @@
         </div>
       </nav>
     </header>
-    <main class="d-flex flex-column flex-lg-row">
+    <main class="d-flex flex-column flex-lg-row align-items-start">
         <section class="w-100">
             <h2 class="text-center">Crea tus Notas</h2>
-            <div class="d-flex justify-content-around">
+            <div class="d-flex">
                 <div class="d-flex flex-column w-50">
-                    <input class="m-2 w-100" type="text" id="titulo" placeholder="Titulo">
-                    <textarea class="m-2 w-100" name="descripcion" id="descripcion" placeholder="Escribe tu nota aqui!"></textarea>
+                    <input class="form-control m-2 w-100" type="text" id="titulo" placeholder="Titulo maximo 13 caracteres" maxlength="13">
+                    <textarea class="form-control m-2 w-100" name="descripcion" id="descripcion" placeholder="Escribe tu nota aqui!"></textarea>
                 </div>
                 <div class="d-flex flex-column w-50">
                     <button type="button" class="mt-2 w-50 m-auto btn btn-success" id="btnGuardarNota">GUARDAR</button>
@@ -57,12 +57,12 @@
         </section>
         <section class="d-flex flex-column w-100">
             <h2 class="text-center">Tus Notas</h2>
-            <input id="buscar" class="m-auto mb-1 w-75" type="text" placeholder="buscar">
+            <input id="buscar" class="m-auto mb-1 w-75 form-control" type="text" placeholder="Buscar">
             <div class="form-check form-switch ms-3">
                 <input class="form-check-input" type="checkbox" role="switch" id="realizadas">
                 <label class="form-check-label" for="realizadas">Realizadas</label>
               </div>
-            <div id="verNotas" class="m-auto p-2">
+            <div id="verNotas" class="m-auto p-2 mb-1 bg-danger">
 
             </div>
         </section>
@@ -70,7 +70,7 @@
     <footer class="bg-body-tertiary d-flex justify-content-center align-items-center">
       <p class="pt-3">
         Created By
-        <a href="https://github.com/juan-jose-aguirre/JuanAguirreEjerciciosJS"
+        <a class="fw-bold text-dark" href="https://github.com/juan-jose-aguirre/JuanAguirreEjerciciosJS"
           >Juan Aguirre</a
         >
         with ❤️
