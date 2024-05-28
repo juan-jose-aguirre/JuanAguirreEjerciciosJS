@@ -1897,6 +1897,8 @@ const beers = [
   },
 ];
 
+
+
 /*
 1- Generar una función que reciba como parámetro el array de cervezas y un valor de alcohol. La función debe devolver un nuevo array con las cervezas que no excedan el nivel etílico. Cada elemento del nuevo array debe ser un objeto que tenga la propiedades nombre, alcohol (abv) y "amargor" (ibu)
 */
@@ -1930,14 +1932,14 @@ function masAlcoholicas (beers = []){
 /*
 3- Generar una función que reciba como parámetro un array de cervezas y devuelva un nuevo array con las 10 cervezas menos amargas
 */
+let cervezas = [...beers];
+console.log(menosAlcoholicas(cervezas));
 
-console.log(menosAlcoholicas(beers));
-
-function menosAlcoholicas(beers) {
-    beers = beers.sort((a,b) => a.abv - b.abv);
+function menosAlcoholicas(cervezas) {
+  cervezas = cervezas.sort((a,b) => a.ibu - b.ibu);
     let tenBeers = [];
     for (let i = 0; i < 10; i++) {
-        tenBeers.push(beers[i]);
+        tenBeers.push(cervezas[i]);
     };
     return tenBeers;
 };
@@ -1947,7 +1949,7 @@ function menosAlcoholicas(beers) {
 Debe devolver un nuevo array con 10 cervezas ordenadas por la propiedad ingresada como segundo argumento, de manera ascendente si el tercero es true o descendente si es false
 */
 
-console.log(ordenar(beers,"abv",false));
+console.log(ordenar(beers,"abv",true));
 
 function ordenar(beers,propiedad,booleano) {
     if(booleano == true){
