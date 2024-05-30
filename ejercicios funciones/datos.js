@@ -1949,7 +1949,7 @@ function menosAlcoholicas(cervezas) {
 Debe devolver un nuevo array con 10 cervezas ordenadas por la propiedad ingresada como segundo argumento, de manera ascendente si el tercero es true o descendente si es false
 */
 
-console.log(ordenar(beers,"abv",true));
+console.log(ordenar(beers,"abv",false));
 
 function ordenar(beers,propiedad,booleano) {
     if(booleano == true){
